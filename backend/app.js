@@ -1,22 +1,23 @@
-import bodyParser from 'body-parser';
-import express from 'express';
+import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
+
 import 'module-alias/register';
+import resolvers from '~gql/resolvers';
+import typeDefs from '~gql/typeDefs';
 
 import '~db/connectDb';
-import '~gql/graphqlServer';
 
-import authRoutes from '~routes/authRoutes';
-import userRoutes from '~routes/userRoutes';
-
-const app = express();
-
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use('/auth', authRoutes);
-app.use('/user', userRoutes);
-
-app.listen(3000, () => {
-  console.log('Server listening on port 3000');
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
 });
+
+startStandaloneServer(server, {
+  listen: { port: 4000 },
+})
+  .then(({ url }) => {
+    console.log(`🚀  Server ready at: ${url}`);
+  })
+  .catch((error) => {
+    console.error('Failed to start server', error);
+  });
