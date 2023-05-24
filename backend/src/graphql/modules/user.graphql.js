@@ -1,4 +1,4 @@
-import User from '../../models/User.js';
+import User from '~models/User.js';
 
 export const userResolvers = {
   Query: {
@@ -11,10 +11,15 @@ export const userResolvers = {
     },
   },
   Mutation: {
-    createUser: () => ({
-      email: 'few',
-      password: 'few',
-    }),
+    createUser: async (_, { email, password }) => {
+      try {
+        const user = new User({ email, password });
+        await user.save();
+        return user;
+      } catch (error) {
+        throw new Error('Failed to create user');
+      }
+    }
   },
 };
 

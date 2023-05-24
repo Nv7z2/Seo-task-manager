@@ -1,11 +1,12 @@
-import express from 'express';
 import bodyParser from 'body-parser';
+import express from 'express';
+import 'module-alias/register';
 
-import database from './src/database/connectDb';
-import graphqlServer from './src/graphql/graphqlServer';
+import '~db/connectDb';
+import '~gql/graphqlServer';
 
-import authRoutes from './src/routes/authRoutes';
-import userRoutes from './src/routes/userRoutes';
+import authRoutes from '~routes/authRoutes';
+import userRoutes from '~routes/userRoutes';
 
 const app = express();
 
