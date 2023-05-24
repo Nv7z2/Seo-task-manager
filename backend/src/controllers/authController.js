@@ -1,14 +1,15 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
+
 import User from '../models/User';
 
 const transporter = nodemailer.createTransport({
   service: 'your-email-service',
   auth: {
     user: 'your-email-username',
-    pass: 'your-email-password'
-  }
+    pass: 'your-email-password',
+  },
 });
 
 async function login(req, res) {
@@ -52,7 +53,7 @@ async function forgotPassword(req, res) {
       from: 'your-email-username',
       to: email,
       subject: 'Password Reset',
-      text: `Your new password: ${newPassword}`
+      text: `Your new password: ${newPassword}`,
     });
 
     return res.json({ message: 'Password reset email sent' });
@@ -62,13 +63,43 @@ async function forgotPassword(req, res) {
   }
 }
 
+async function generateUser(req, res) {
+  const { email, password } = req.body;
+
+  console.log(req.body);
+
+  try {
+    // Sprawdź, czy użytkownik o podanym adresie e-mail już istnieje
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      console.log('User already exists');
+      return res.status(400).json({ message: 'User already exists' });
+      return;
+    }
+
+    // Zaszyfruj hasło
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Stwórz nowego użytkownika
+    const newUser = new User({ email, password: hashedPassword });
+    await newUser.save();
+
+    console.log('User created successfully');
+    return res.status(200).json({ message: 'User created successfully' });
+  } catch (error) {
+    console.error('Failed to generate user', error);
+    return res.status(400).json({ message: 'Failed to generate user' });
+  }
+}
+
 function generateRandomPassword() {
   // ...
   // Implementacja funkcji generateRandomPassword
   // ...
 }
 
-module.exports = {
+export default {
   login,
-  forgotPassword
+  generateUser,
+  forgotPassword,
 };
