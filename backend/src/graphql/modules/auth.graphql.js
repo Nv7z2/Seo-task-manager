@@ -13,9 +13,9 @@ export const authResolvers = {
   },
 };
 
-export const authTypeDefs = `
+export const authTypeDefs = `#graphql
 type User {
-  id: String!
+  _id: ID!
   email: String!
   password: String!
   roles: Int
