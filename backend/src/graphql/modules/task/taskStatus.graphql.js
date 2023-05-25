@@ -1,5 +1,5 @@
-import TaskStatusModel from '~models/TaskStatus.model';
 import { taskStatusConsts } from '~const/task/taskStatus.const';
+import TaskStatusModel from '~models/task/TaskStatus.model';
 
 export const taskStatusResolver = {
   Query: {

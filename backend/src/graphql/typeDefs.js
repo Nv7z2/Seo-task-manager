@@ -1,5 +1,6 @@
-import { authTypeDefs } from './modules/auth.graphql';
-import { taskStatusTypeDefs } from './modules/taskStatus.graphql';
+import { authTypeDefs } from './modules/auth/auth.graphql';
+import { taskStatusTypeDefs } from './modules/task/taskStatus.graphql';
+import { taskPriorityTypeDefs } from './modules/task/taskPriority.graphql';
 
 export default `
   type Query {
@@ -13,4 +14,6 @@ export default `
   ${authTypeDefs}
 
   ${taskStatusTypeDefs}
+
+  ${taskPriorityTypeDefs}
 `;
