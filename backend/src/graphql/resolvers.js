@@ -1,5 +1,5 @@
-import { userResolvers } from './modules/user.graphql';
+import { authResolvers } from './modules/auth.graphql';
 
 export default {
-  ...userResolvers,
+  ...authResolvers,
 };

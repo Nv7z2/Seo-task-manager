@@ -1,6 +1,6 @@
 import { createUser, login } from '~controllers/authController.js';
 
-export const userResolvers = {
+export const authResolvers = {
   Query: {
     login: async (_, { email, password }) => {
       return await login({ email, password });
@@ -13,7 +13,7 @@ export const userResolvers = {
   },
 };
 
-export const userTypeDefs = `
+export const authTypeDefs = `
 type User {
   id: String!
   email: String!

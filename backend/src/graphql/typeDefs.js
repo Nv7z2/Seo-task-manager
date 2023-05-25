@@ -1,4 +1,4 @@
-import { userTypeDefs } from './modules/user.graphql';
+import { authTypeDefs } from './modules/auth.graphql';
 
 export default `
   type Query {
@@ -9,5 +9,5 @@ export default `
     _: String
   }
   
-  ${userTypeDefs}
+  ${authTypeDefs}
 `;
