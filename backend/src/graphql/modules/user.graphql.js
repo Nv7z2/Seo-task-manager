@@ -1,25 +1,15 @@
-import User from '~models/User.js';
+import { createUser, login } from '~controllers/authController.js';
 
 export const userResolvers = {
   Query: {
-    getUser: async (_, { email }) => {
-      try {
-        return await User.findOne({ email });
-      } catch (error) {
-        throw new Error('Failed to fetch user');
-      }
-    },
+    login: async (_, { email, password }) => {
+      return await login({ email, password });
+    }
   },
   Mutation: {
     createUser: async (_, { email, password }) => {
-      try {
-        const user = new User({ email, password });
-        await user.save();
-        return user;
-      } catch (error) {
-        throw new Error('Failed to create user');
-      }
-    }
+      return await createUser({ email, password });
+    },
   },
 };
 
@@ -33,11 +23,17 @@ type User {
   updatedAt: String!
 }
 
+type UserResponse {
+  data: User
+  status: String!
+  message: String!
+}
+
 extend type Query {
-  getUser(email: String!): User
+  login(email: String!, password: String!): UserResponse
 }
 
 extend type Mutation {
-  createUser(email: String!, password: String!): User
+  createUser(email: String!, password: String!): UserResponse
 }
 `;

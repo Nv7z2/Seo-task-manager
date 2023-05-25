@@ -1,38 +1,28 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import nodemailer from 'nodemailer';
 
 import User from '~models/User';
+import { handleAuthError, handleAuthResponse } from '~utils/auth/handleAuthResponse';
 
-const transporter = nodemailer.createTransport({
-  service: 'your-email-service',
-  auth: {
-    user: 'your-email-username',
-    pass: 'your-email-password',
-  },
-});
+export async function login({ email, password }) {
+  // TODO: Ja to kiedyś zrobię
+  // try {
+  //   const user = await User.findOne({ email });
+  //   if (!user) {
+  //     return handleAuthError('User not found', 404);
+  //   }
 
-async function login(req, res) {
-  const { email, password } = req.body;
+  //   const passwordMatch = await bcrypt.compare(password, user.password);
+  //   if (!passwordMatch) {
+  //     return handleAuthError('Invalid password', 401);
+  //   }
 
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
+  //   const token = jwt.sign({ userId: user.id }, 'your-secret-key', { expiresIn: '1h' });
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) {
-      return res.status(401).json({ error: 'Invalid password' });
-    }
-
-    const token = jwt.sign({ email }, 'your-secret-key', { expiresIn: '1h' });
-
-    return res.json({ token });
-  } catch (error) {
-    console.error('Login error', error);
-    return res.status(500).json({ error: 'Internal server error' });
-  }
+  //   return handleAuthResponse(token, user);
+  // } catch (error) {
+  //   return handleAuthError('Internal server error', 500, error);
+  // }
 }
 
 async function forgotPassword(req, res) {
@@ -44,7 +34,7 @@ async function forgotPassword(req, res) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const newPassword = generateRandomPassword();
+    const newPassword = 'fwenofew';
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
     await user.save();
@@ -63,43 +53,21 @@ async function forgotPassword(req, res) {
   }
 }
 
-async function generateUser(req, res) {
-  const { email, password } = req.body;
-
-  console.log(req.body);
-
+export async function createUser({ email, password }) {
   try {
-    // Sprawdź, czy użytkownik o podanym adresie e-mail już istnieje
     const existingUser = await User.findOne({ email });
+
     if (existingUser) {
-      console.log('User already exists');
-      return res.status(400).json({ message: 'User already exists' });
-      return;
+      return handleAuthError('User already exists', 400);
     }
 
-    // Zaszyfruj hasło
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Stwórz nowego użytkownika
     const newUser = new User({ email, password: hashedPassword });
     await newUser.save();
 
-    console.log('User created successfully');
-    return res.status(200).json({ message: 'User created successfully' });
+    return handleAuthResponse('User created', newUser);
   } catch (error) {
-    console.error('Failed to generate user', error);
-    return res.status(400).json({ message: 'Failed to generate user' });
+    return handleAuthError('Failed to generate user', 500, error);
   }
 }
-
-function generateRandomPassword() {
-  // ...
-  // Implementacja funkcji generateRandomPassword
-  // ...
-}
-
-export default {
-  login,
-  generateUser,
-  forgotPassword,
-};
