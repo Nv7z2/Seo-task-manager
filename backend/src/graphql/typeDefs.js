@@ -1,4 +1,5 @@
 import { authTypeDefs } from './modules/auth.graphql';
+import { taskStatusTypeDefs } from './modules/taskStatus.graphql';
 
 export default `
   type Query {
@@ -10,4 +11,6 @@ export default `
   }
   
   ${authTypeDefs}
+
+  ${taskStatusTypeDefs}
 `;
