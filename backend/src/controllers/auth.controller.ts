@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 // import jwt from 'jsonwebtoken';
 
-import User from '~models/User';
+import User from '~models/user';
 import { handleAuthError, handleAuthResponse } from '~utils/auth/handleAuthResponse';
 
 export async function login({ email, password }) {

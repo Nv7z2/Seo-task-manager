@@ -1,4 +1,4 @@
-import TaskPriority from '~models/task/TaskPriority.model';
+import TaskPriority from '~models/task/taskPriority.model';
 
 export const taskPriorityResolver = {
   Query: {

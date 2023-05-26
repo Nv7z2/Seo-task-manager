@@ -3,9 +3,13 @@ import { taskPrioritySchema } from './modules/task/taskPriority.graphql';
 import { taskStatusSchema } from './modules/task/taskStatus.graphql';
 
 export default `#graphql
-  type Query {}
+  type Query {
+    _empty: String
+  }
 
-  type Mutation {}
+  type Mutation {
+    _empty: String
+  }
 
   type ResponseSuccess {
     code: String!

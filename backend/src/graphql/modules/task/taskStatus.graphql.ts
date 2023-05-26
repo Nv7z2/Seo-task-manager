@@ -29,7 +29,7 @@ input TaskStatusInput {
   color: String
 }
 
-extend type TaskStatusResponse {
+type TaskStatusResponse {
   data: TaskStatus
 }
 

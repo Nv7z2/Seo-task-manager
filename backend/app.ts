@@ -2,8 +2,8 @@ import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 
 import 'module-alias/register';
-import resolvers from './src/graphql/resolvers';
-import schemas from './src/graphql/schemas';
+import resolvers from '~gql/resolvers';
+import schemas from '~gql/schemas';
 
 import '~db/connectDb';
 
@@ -11,6 +11,7 @@ const server = new ApolloServer({
   typeDefs: schemas,
   resolvers,
 });
+
 
 startStandaloneServer(server, {
   listen: { port: 4000 },

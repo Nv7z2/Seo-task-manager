@@ -9,15 +9,15 @@
     "types": ["node"],
     "baseUrl": ".",
     "paths": {
-      "~db*": ["./src/database/*"],
-      "~gql*": ["./src/graphql/*"],
-      "~routes*": ["./src/routes/*"],
-      "~controllers*": ["./src/controllers/*"],
-      "~models*": ["./src/models/*"],
-      "~utils*": ["./src/utils/*"],
-      "~middlewares*": ["./src/middlewares/*"],
-      "~const*": ["./src/constants/*"]
-    }
-  },
-  "include": ["./src/*", "*.d.ts", "app.ts"]
+      "~db/*": ["./src/database/*"],
+      "~gql/*": ["./src/graphql/*"],
+      "~routes/*": ["./src/routes/*"],
+      "~controllers/*": ["./src/controllers/*"],
+      "~models/*": ["./src/models/*"],
+      "~utils/*": ["./src/utils/*"],
+      "~middlewares/*": ["./src/middlewares/*"],
+      "~const/*": ["./src/constants/*"]
+    },
+    "resolveJsonModule": true
+  }
 }
