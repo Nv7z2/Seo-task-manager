@@ -26,7 +26,7 @@ export const taskPriorityResolver = {
   },
 };
 
-export const taskPriorityTypeDefs = `#graphql
+export const taskPrioritySchema = `#graphql
 type TaskPriority {
   _id: ID!
   name: String!

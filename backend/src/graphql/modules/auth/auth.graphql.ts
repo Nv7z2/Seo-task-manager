@@ -1,4 +1,4 @@
-import { createUser, login } from '~controllers/authController.js';
+import { createUser, login } from '~controllers/auth.controller';
 
 export const authResolvers = {
   Query: {
@@ -13,7 +13,7 @@ export const authResolvers = {
   },
 };
 
-export const authTypeDefs = `#graphql
+export const authSchema = `#graphql
 type User {
   _id: ID!
   email: String!

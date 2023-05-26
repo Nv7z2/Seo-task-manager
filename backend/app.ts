@@ -2,13 +2,13 @@ import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 
 import 'module-alias/register';
-import resolvers from '~gql/resolvers';
-import typeDefs from '~gql/typeDefs';
+import resolvers from './src/graphql/resolvers';
+import schemas from './src/graphql/schemas';
 
 import '~db/connectDb';
 
 const server = new ApolloServer({
-  typeDefs,
+  typeDefs: schemas,
   resolvers,
 });
 

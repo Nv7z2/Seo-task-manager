@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "target": "es2020",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "~db*": ["./src/database/*"],
+      "~gql*": ["./src/graphql/*"],
+      "~routes*": ["./src/routes/*"],
+      "~controllers*": ["./src/controllers/*"],
+      "~models*": ["./src/models/*"],
+      "~utils*": ["./src/utils/*"],
+      "~middlewares*": ["./src/middlewares/*"],
+      "~const*": ["./src/constants/*"]
+    }
+  },
+  "include": ["./src/*", "*.d.ts", "app.ts"]
+}

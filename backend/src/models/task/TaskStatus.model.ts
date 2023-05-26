@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { taskStatusConsts } from '~const/task/taskStatus.const';
 
-const taskStatusSchema = new mongoose.Schema(
+const taskStatusSchema = new Schema(
   {
     name: {
       type: String,
@@ -24,4 +24,4 @@ const taskStatusSchema = new mongoose.Schema(
   },
 );
 
-export default mongoose.model('TaskStatus', taskStatusSchema);
+export default model('TaskStatus', taskStatusSchema);

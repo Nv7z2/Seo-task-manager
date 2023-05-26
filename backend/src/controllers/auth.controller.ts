@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 
 import User from '~models/User';
 import { handleAuthError, handleAuthResponse } from '~utils/auth/handleAuthResponse';
@@ -25,33 +25,33 @@ export async function login({ email, password }) {
   // }
 }
 
-async function forgotPassword(req, res) {
-  const { email } = req.body;
+// async function forgotPassword(req, res) {
+//   const { email } = req.body;
 
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
+//   try {
+//     const user = await User.findOne({ email });
+//     if (!user) {
+//       return res.status(404).json({ error: 'User not found' });
+//     }
 
-    const newPassword = 'fwenofew';
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedPassword;
-    await user.save();
+//     const newPassword = 'fwenofew';
+//     const hashedPassword = await bcrypt.hash(newPassword, 10);
+//     user.password = hashedPassword;
+//     await user.save();
 
-    await transporter.sendMail({
-      from: 'your-email-username',
-      to: email,
-      subject: 'Password Reset',
-      text: `Your new password: ${newPassword}`,
-    });
+//     await transporter.sendMail({
+//       from: 'your-email-username',
+//       to: email,
+//       subject: 'Password Reset',
+//       text: `Your new password: ${newPassword}`,
+//     });
 
-    return res.json({ message: 'Password reset email sent' });
-  } catch (error) {
-    console.error('Forgot password error', error);
-    return res.status(500).json({ error: 'Internal server error' });
-  }
-}
+//     return res.json({ message: 'Password reset email sent' });
+//   } catch (error) {
+//     console.error('Forgot password error', error);
+//     return res.status(500).json({ error: 'Internal server error' });
+//   }
+// }
 
 export async function createUser({ email, password }) {
   try {
