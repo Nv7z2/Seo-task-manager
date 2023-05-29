@@ -7,11 +7,6 @@ const taskPrioritySchema = new Schema(
       required: true,
       unique: true,
     },
-    index: {
-      type: Number,
-      required: true,
-      unique: true,
-    },
     color: {
       type: String,
       required: false,

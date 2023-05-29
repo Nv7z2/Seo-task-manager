@@ -11,15 +11,6 @@ export default `#graphql
     _empty: String
   }
 
-  type ResponseSuccess {
-    code: String!
-  }
-
-  type ResponseError {
-    code: String!
-    message: String
-  }
-
   ${authSchema}
 
   ${taskStatusSchema}

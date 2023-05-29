@@ -1,27 +1,14 @@
-import TaskPriority from '~models/task/taskPriority.model';
+import { createTaskPriority, getTaskPriorities } from '~controllers/task/taskPriority.controller';
 
 export const taskPriorityResolver = {
   Query: {
     getTaskPriorities: async (_) => {
-      try {
-        const taskPriorities = await TaskPriority.find();
-
-        return taskPriorities;
-      } catch (error) {
-        console.log(error);
-      }
+      return await getTaskPriorities();
     },
   },
   Mutation: {
     createTaskPriotity: async (_, { input }) => {
-      try {
-        const taskPriority = new TaskPriority({ ...input });
-        await taskPriority.save();
-
-        return { taskPriority, message: 'Task priority created successfully' };
-      } catch (error) {
-        return { message: error.message };
-      }
+      return await createTaskPriority(input);
     },
   },
 };
@@ -30,7 +17,6 @@ export const taskPrioritySchema = `#graphql
 type TaskPriority {
   _id: ID!
   name: String!
-  index: Int!
   color: String
   createdAt: String
   updatedAt: String
@@ -43,12 +29,17 @@ input TaskPriorityInput {
 }
 
 type TaskPriorityResponse {
-  taskPriority: TaskPriority
-  message: String!
+  data: TaskPriority
+  code: String
+}
+
+type TaskPriorityArrayResponse {
+  dataArray: [TaskPriority]
+  code: String
 }
 
 extend type Query {
-  getTaskPriorities: [TaskPriority!]!
+  getTaskPriorities: TaskPriorityArrayResponse!
 }
 
 extend type Mutation {
