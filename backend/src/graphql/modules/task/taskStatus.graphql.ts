@@ -2,7 +2,7 @@ import { createTaskStatus, getTaskStatuses } from '~controllers/task/taskStatus.
 
 export const taskStatusResolver = {
   Query: {
-    getTaskStatuses: async (_) => {
+    taskStatuses: async (_) => {
       return await getTaskStatuses();
     },
   },
@@ -31,16 +31,16 @@ input TaskStatusInput {
 
 type TaskStatusResponse {
   data: TaskStatus
-  code: String!
+  code: String
 }
 
 type TaskStatusArrayResponse {
-  dataArray: [TaskStatus]
+  dataArray: [TaskStatus!]
   code: String!
 }
 
 extend type Query {
-  getTaskStatuses: TaskStatusArrayResponse!
+  taskStatuses: TaskStatusArrayResponse!
 }
 
 extend type Mutation {

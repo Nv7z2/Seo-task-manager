@@ -2,7 +2,7 @@ import { createTaskPriority, getTaskPriorities } from '~controllers/task/taskPri
 
 export const taskPriorityResolver = {
   Query: {
-    getTaskPriorities: async (_) => {
+    taskPriorities: async (_) => {
       return await getTaskPriorities();
     },
   },
@@ -39,7 +39,7 @@ type TaskPriorityArrayResponse {
 }
 
 extend type Query {
-  getTaskPriorities: TaskPriorityArrayResponse!
+  taskPriorities: TaskPriorityArrayResponse!
 }
 
 extend type Mutation {
